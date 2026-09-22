@@ -1,0 +1,9 @@
+include README.md LICENSE CITATION.cff requirements.txt pyproject.toml
+recursive-include src *.py
+recursive-include scripts *.py
+recursive-include tests *.py
+recursive-include data *
+recursive-include figures *
+recursive-include notebook *
+recursive-include latex *
+recursive-include docs *.md

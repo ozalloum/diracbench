@@ -1,0 +1,80 @@
+analysis,scope,case,method,metric,value,reference,reference_value,absolute_error,relative_error
+energy,angular_channels,-1,Finite difference,relative_error_vs_shooting,0.798570851314,shooting,0.798574986432,4.13511748043e-06,5.17812046544e-06
+energy,angular_channels,-1,Chebyshev,relative_error_vs_shooting,0.798574986776,shooting,0.798574986432,3.44457240509e-10,4.31339882116e-10
+energy,angular_channels,-1,DKB B-spline,relative_error_vs_shooting,0.798569711537,shooting,0.798574986432,5.27489534974e-06,6.60538514148e-06
+energy,angular_channels,-1,All methods,cross_method_spread,5.27523980698e-06,max(method energy)-min(method energy),,5.27523980698e-06,
+energy,angular_channels,1,Finite difference,relative_error_vs_shooting,0.972555050325,shooting,0.972565268759,1.02184339109e-05,1.05066819052e-05
+energy,angular_channels,1,Chebyshev,relative_error_vs_shooting,0.972563616008,shooting,0.972565268759,1.65275112818e-06,1.69937296886e-06
+energy,angular_channels,1,DKB B-spline,relative_error_vs_shooting,0.972567285099,shooting,0.972565268759,2.01634060581e-06,2.07321880658e-06
+energy,angular_channels,1,All methods,cross_method_spread,1.22347745167e-05,max(method energy)-min(method energy),,1.22347745167e-05,
+energy,angular_channels,-2,Finite difference,relative_error_vs_shooting,0.928533146477,shooting,0.9285358974,2.7509231374e-06,2.96264597319e-06
+energy,angular_channels,-2,Chebyshev,relative_error_vs_shooting,0.928535923621,shooting,0.9285358974,2.62213691871e-08,2.8239478151e-08
+energy,angular_channels,-2,DKB B-spline,relative_error_vs_shooting,0.928524710893,shooting,0.9285358974,1.11865066412e-05,1.20474681405e-05
+energy,angular_channels,-2,All methods,cross_method_spread,1.12127280104e-05,max(method energy)-min(method energy),,1.12127280104e-05,
+energy,parameter_sets,P1,Finite difference,relative_error_vs_shooting,0.798570162135,shooting,0.798574986432,4.8242970988e-06,6.04113224277e-06
+energy,parameter_sets,P1,Chebyshev,relative_error_vs_shooting,0.798574986454,shooting,0.798574986432,2.25452989611e-11,2.82319122739e-11
+energy,parameter_sets,P1,DKB B-spline,relative_error_vs_shooting,0.798570918869,shooting,0.798574986432,4.06756282578e-06,5.09352646263e-06
+energy,parameter_sets,P1,All methods,cross_method_spread,4.8243196441e-06,max(method energy)-min(method energy),,4.8243196441e-06,
+energy,parameter_sets,P2,Finite difference,relative_error_vs_shooting,0.825818658743,shooting,0.825822610052,3.95130850928e-06,4.78469402652e-06
+energy,parameter_sets,P2,Chebyshev,relative_error_vs_shooting,0.825822610096,shooting,0.825822610052,4.45589121156e-11,5.3957001871e-11
+energy,parameter_sets,P2,DKB B-spline,relative_error_vs_shooting,0.82581901385,shooting,0.825822610052,3.59620164092e-06,4.35469021694e-06
+energy,parameter_sets,P2,All methods,cross_method_spread,3.95135306819e-06,max(method energy)-min(method energy),,3.95135306819e-06,
+energy,parameter_sets,P3,Finite difference,relative_error_vs_shooting,0.73273036056,shooting,0.73273491952,4.55895952989e-06,6.22184013405e-06
+energy,parameter_sets,P3,Chebyshev,relative_error_vs_shooting,0.732734919527,shooting,0.73273491952,6.94455604133e-12,9.47758303356e-12
+energy,parameter_sets,P3,DKB B-spline,relative_error_vs_shooting,0.732727335226,shooting,0.73273491952,7.58429379266e-06,1.03506651459e-05
+energy,parameter_sets,P3,All methods,cross_method_spread,7.58430073722e-06,max(method energy)-min(method energy),,7.58430073722e-06,
+energy,tensor_strength_sweep,-0.12,Finite difference,relative_error_vs_shooting,0.757834845166,shooting,0.757843230371,8.38520527469e-06,1.10645644622e-05
+energy,tensor_strength_sweep,-0.12,Chebyshev,relative_error_vs_shooting,0.757843230609,shooting,0.757843230371,2.38233432981e-10,3.14357143316e-10
+energy,tensor_strength_sweep,-0.12,DKB B-spline,relative_error_vs_shooting,0.757837569816,shooting,0.757843230371,5.66055534323e-06,7.46929591291e-06
+energy,tensor_strength_sweep,-0.12,All methods,cross_method_spread,8.38544350812e-06,max(method energy)-min(method energy),,8.38544350812e-06,
+energy,tensor_strength_sweep,-0.0799999999999999,Finite difference,relative_error_vs_shooting,0.77125429595,shooting,0.771262221399,7.92544924022e-06,1.02759463906e-05
+energy,tensor_strength_sweep,-0.0799999999999999,Chebyshev,relative_error_vs_shooting,0.771262221698,shooting,0.771262221399,2.9914981603e-10,3.87870438522e-10
+energy,tensor_strength_sweep,-0.0799999999999999,DKB B-spline,relative_error_vs_shooting,0.771256590146,shooting,0.771262221399,5.63125314179e-06,7.30134704586e-06
+energy,tensor_strength_sweep,-0.0799999999999999,All methods,cross_method_spread,7.92574839004e-06,max(method energy)-min(method energy),,7.92574839004e-06,
+energy,tensor_strength_sweep,-0.0399999999999999,Finite difference,relative_error_vs_shooting,0.784866161028,shooting,0.784873564267,7.40323887338e-06,9.43239677119e-06
+energy,tensor_strength_sweep,-0.0399999999999999,Chebyshev,relative_error_vs_shooting,0.784873564646,shooting,0.784873564267,3.78673425949e-10,4.82464237795e-10
+energy,tensor_strength_sweep,-0.0399999999999999,DKB B-spline,relative_error_vs_shooting,0.784868035024,shooting,0.784873564267,5.52924248343e-06,7.04475565895e-06
+energy,tensor_strength_sweep,-0.0399999999999999,All methods,cross_method_spread,7.40361754681e-06,max(method energy)-min(method energy),,7.40361754681e-06,
+energy,tensor_strength_sweep,0.0,Finite difference,relative_error_vs_shooting,0.798568155023,shooting,0.798574986432,6.83140925539e-06,8.55449941641e-06
+energy,tensor_strength_sweep,0.0,Chebyshev,relative_error_vs_shooting,0.798574986915,shooting,0.798574986432,4.82788697909e-10,6.04562760056e-10
+energy,tensor_strength_sweep,0.0,DKB B-spline,relative_error_vs_shooting,0.798569633512,shooting,0.798574986432,5.35291958847e-06,6.70308947741e-06
+energy,tensor_strength_sweep,0.0,All methods,cross_method_spread,6.83189204409e-06,max(method energy)-min(method energy),,6.83189204409e-06,
+energy,tensor_strength_sweep,0.04,Finite difference,relative_error_vs_shooting,0.812254338875,shooting,0.812260562747,6.22387191684e-06,7.6624081019e-06
+energy,tensor_strength_sweep,0.04,Chebyshev,relative_error_vs_shooting,0.812260563371,shooting,0.812260562747,6.24930218684e-10,7.69371612197e-10
+energy,tensor_strength_sweep,0.04,DKB B-spline,relative_error_vs_shooting,0.812255459979,shooting,0.812260562747,5.10276743704e-06,6.28218046163e-06
+energy,tensor_strength_sweep,0.04,All methods,cross_method_spread,6.22449684706e-06,max(method energy)-min(method energy),,6.22449684706e-06,
+energy,tensor_strength_sweep,0.08,Finite difference,relative_error_vs_shooting,0.825817014823,shooting,0.82582261005,5.59522737686e-06,6.77533807959e-06
+energy,tensor_strength_sweep,0.08,Chebyshev,relative_error_vs_shooting,0.825822610872,shooting,0.82582261005,8.21517409655e-10,9.94786773402e-10
+energy,tensor_strength_sweep,0.08,DKB B-spline,relative_error_vs_shooting,0.825817828046,shooting,0.82582261005,4.78200466325e-06,5.79059546815e-06
+energy,tensor_strength_sweep,0.08,All methods,cross_method_spread,5.59604889427e-06,max(method energy)-min(method energy),,5.59604889427e-06,
+energy,tensor_strength_sweep,0.12,Finite difference,relative_error_vs_shooting,0.839148955572,shooting,0.839153915876,4.96030449437e-06,5.91107829032e-06
+energy,tensor_strength_sweep,0.12,Chebyshev,relative_error_vs_shooting,0.839153916965,shooting,0.839153915876,1.08859343761e-09,1.2972512158e-09
+energy,tensor_strength_sweep,0.12,DKB B-spline,relative_error_vs_shooting,0.839149518321,shooting,0.839153915876,4.39755556625e-06,5.24046361824e-06
+energy,tensor_strength_sweep,0.12,All methods,cross_method_spread,4.96139308781e-06,max(method energy)-min(method energy),,4.96139308781e-06,
+wavefunction,P1_kappa_minus_1,FD vs shooting,FD vs shooting,L2_difference,0.00137528446208,shooting,0.999989678537,0.00137528446208,1.03214628048e-05
+wavefunction,P1_kappa_minus_1,Chebyshev vs shooting,Chebyshev vs shooting,L2_difference,0.00114532800501,shooting,0.999514239682,0.00114532800501,0.000485760317587
+resolution,P1_kappa_minus_1,200,Finite difference,absolute_error_vs_shooting,8.31387652208e-05,shooting,0.798574986432,8.31387652208e-05,0.000104108902274
+resolution,P1_kappa_minus_1,300,Finite difference,absolute_error_vs_shooting,3.70605692233e-05,shooting,0.798574986432,3.70605692233e-05,4.64083772381e-05
+resolution,P1_kappa_minus_1,450,Finite difference,absolute_error_vs_shooting,1.65053560104e-05,shooting,0.798574986432,1.65053560104e-05,2.0668511149e-05
+resolution,P1_kappa_minus_1,650,Finite difference,absolute_error_vs_shooting,7.92114456494e-06,shooting,0.798574986432,7.92114456494e-06,9.91909926997e-06
+resolution,P1_kappa_minus_1,900,Finite difference,absolute_error_vs_shooting,4.13511748043e-06,shooting,0.798574986432,4.13511748043e-06,5.17812046544e-06
+resolution,P1_kappa_minus_1,1200,Finite difference,absolute_error_vs_shooting,2.32726208071e-06,shooting,0.798574986432,2.32726208071e-06,2.91426869143e-06
+resolution,P1_kappa_minus_1,40,Chebyshev,absolute_error_vs_shooting,3.05398505818e-07,shooting,0.798574986432,3.05398505818e-07,3.82429341022e-07
+resolution,P1_kappa_minus_1,60,Chebyshev,absolute_error_vs_shooting,1.78589665278e-09,shooting,0.798574986432,1.78589665278e-09,2.23635436011e-09
+resolution,P1_kappa_minus_1,80,Chebyshev,absolute_error_vs_shooting,7.32969240858e-10,shooting,0.798574986432,7.32969240858e-10,9.17846480682e-10
+resolution,P1_kappa_minus_1,100,Chebyshev,absolute_error_vs_shooting,4.82782258615e-10,shooting,0.798574986432,4.82782258615e-10,6.04554696575e-10
+resolution,P1_kappa_minus_1,120,Chebyshev,absolute_error_vs_shooting,3.44457240509e-10,shooting,0.798574986432,3.44457240509e-10,4.31339882116e-10
+resolution,P1_kappa_minus_1,160,Chebyshev,absolute_error_vs_shooting,2.02163286112e-10,shooting,0.798574986432,2.02163286112e-10,2.53155044356e-10
+resolution,P1_kappa_minus_1,28,DKB B-spline,absolute_error_vs_shooting,4.3734810145e-05,shooting,0.798574986432,4.3734810145e-05,5.47660656645e-05
+resolution,P1_kappa_minus_1,34,DKB B-spline,absolute_error_vs_shooting,2.73164778519e-06,shooting,0.798574986432,2.73164778519e-06,3.42065282735e-06
+resolution,P1_kappa_minus_1,40,DKB B-spline,absolute_error_vs_shooting,5.40873714383e-06,shooting,0.798574986432,5.40873714383e-06,6.77298592584e-06
+resolution,P1_kappa_minus_1,46,DKB B-spline,absolute_error_vs_shooting,5.27489534974e-06,shooting,0.798574986432,5.27489534974e-06,6.60538514148e-06
+resolution,P1_kappa_minus_1,52,DKB B-spline,absolute_error_vs_shooting,9.46156341541e-06,shooting,0.798574986432,9.46156341541e-06,1.1848058825e-05
+resolution,P1_kappa_minus_1,58,DKB B-spline,absolute_error_vs_shooting,4.19028358201e-06,shooting,0.798574986432,4.19028358201e-06,5.24720114354e-06
+domain,P1_kappa_minus_1,15,Shooting,absolute_error_vs_rmax_35,0.798574931263,shooting at largest rmax,0.798574986432,5.51689046668e-08,6.90841882155e-08
+domain,P1_kappa_minus_1,20,Shooting,absolute_error_vs_rmax_35,0.798574986333,shooting at largest rmax,0.798574986432,9.89793802475e-11,1.23945004451e-10
+domain,P1_kappa_minus_1,25,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,3.56825680115e-13,4.46828020132e-13
+domain,P1_kappa_minus_1,30,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,1.75859327101e-13,2.20216423114e-13
+domain,P1_kappa_minus_1,35,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,0,0
+spurious_state,P1_kappa_minus_1_centered_FD,0.7985708513144871,Finite difference,alternation_fraction,0,zero for smooth physical branch,0,0,
+spurious_state,P1_kappa_minus_1_centered_FD,0.972555050324958,Finite difference,alternation_fraction,1,zero for smooth physical branch,0,1,

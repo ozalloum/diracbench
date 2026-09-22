@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use DiracBench, please cite the associated Computer Physics Communications manuscript."
+title: "DiracBench: A Reproducible Four-Method Framework for Relativistic Bound States with Scalar, Vector, and Tensor Interactions"
+date-released: 2026-09-21
+repository-code: https://github.com/ozalloum/diracbench
+authors:
+  - family-names: Zalloum
+    given-names: Othman H. Y.
+    affiliation: Palestine Polytechnic University
+    orcid: https://orcid.org/0000-0001-7282-1332
+license: MIT
+keywords:
+  - Dirac equation
+  - radial eigenvalue problem
+  - kinetic balance
+  - B-splines
+  - Chebyshev collocation
+  - reproducible computational physics

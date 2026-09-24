@@ -51,7 +51,7 @@ energy,tensor_strength_sweep,0.12,Finite difference,relative_error_vs_shooting,0
 energy,tensor_strength_sweep,0.12,Chebyshev,relative_error_vs_shooting,0.839153916965,shooting,0.839153915876,1.08859343761e-09,1.2972512158e-09
 energy,tensor_strength_sweep,0.12,DKB B-spline,relative_error_vs_shooting,0.839149518321,shooting,0.839153915876,4.39755556625e-06,5.24046361824e-06
 energy,tensor_strength_sweep,0.12,All methods,cross_method_spread,4.96139308781e-06,max(method energy)-min(method energy),,4.96139308781e-06,
-wavefunction,P1_kappa_minus_1,FD vs shooting,FD vs shooting,L2_difference,0.00137528446208,shooting,0.999989678537,0.00137528446208,1.03214628048e-05
+wavefunction,P1_kappa_minus_1,FD vs shooting,FD vs shooting,L2_difference,0.00137528446208,shooting,0.999989678537,0.00137528446208,1.0321462805e-05
 wavefunction,P1_kappa_minus_1,Chebyshev vs shooting,Chebyshev vs shooting,L2_difference,0.00114532800501,shooting,0.999514239682,0.00114532800501,0.000485760317587
 resolution,P1_kappa_minus_1,200,Finite difference,absolute_error_vs_shooting,8.31387652208e-05,shooting,0.798574986432,8.31387652208e-05,0.000104108902274
 resolution,P1_kappa_minus_1,300,Finite difference,absolute_error_vs_shooting,3.70605692233e-05,shooting,0.798574986432,3.70605692233e-05,4.64083772381e-05
@@ -76,5 +76,5 @@ domain,P1_kappa_minus_1,20,Shooting,absolute_error_vs_rmax_35,0.798574986333,sho
 domain,P1_kappa_minus_1,25,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,3.56825680115e-13,4.46828020132e-13
 domain,P1_kappa_minus_1,30,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,1.75859327101e-13,2.20216423114e-13
 domain,P1_kappa_minus_1,35,Shooting,absolute_error_vs_rmax_35,0.798574986432,shooting at largest rmax,0.798574986432,0,0
-spurious_state,P1_kappa_minus_1_centered_FD,0.7985708513144871,Finite difference,alternation_fraction,0,zero for smooth physical branch,0,0,
+spurious_state,P1_kappa_minus_1_centered_FD,0.7985708513144872,Finite difference,alternation_fraction,0,zero for smooth physical branch,0,0,
 spurious_state,P1_kappa_minus_1_centered_FD,0.972555050324958,Finite difference,alternation_fraction,1,zero for smooth physical branch,0,1,

@@ -1,7 +1,7 @@
 {
   "max_energy_relative_error": 1.204746814049117e-05,
   "max_cross_method_spread": 1.2234774516728386e-05,
-  "max_wavefunction_L2_difference": 0.0013752844620778,
+  "max_wavefunction_L2_difference": 0.0013752844620775,
   "minimum_wavefunction_overlap": 0.9995142396824128,
   "maximum_domain_relative_error": 6.908418821550556e-08,
   "maximum_fd_alternation_fraction": 1.0

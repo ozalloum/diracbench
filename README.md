@@ -2,7 +2,7 @@
 
 DiracBench is a reproducible four-method framework for bound states of the
 spherical radial Dirac equation with scalar, vector, and radial tensor
-interactions. It combines adaptive two-sided Runge-Kutta shooting, centered
+interactions. It combines adaptive two-sided Runge--Kutta shooting, centered
 finite-difference diagonalization, Chebyshev collocation, and a
 dual-kinetic-balance B-spline Galerkin method.
 
@@ -19,14 +19,15 @@ Python 3.10 or newer is supported.
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
+python -m unittest discover -s tests -t . -v
 python run_campaign.py --output generated_campaign
+python scripts/plot_publication_figures.py --output generated_campaign
 ```
 
 The campaign accepts an arbitrary output directory. It creates or refreshes
 only its known `src/`, `data/`, and `figures/` products and does not delete the
-directory or unrelated files. To regenerate the included products in place, use
-`python run_campaign.py --output .`.
+directory or unrelated files. To regenerate the included release products in
+place, use `python run_campaign.py --output .`.
 
 The reusable solver can also be installed as a Python module:
 
@@ -37,7 +38,7 @@ python -c "import diracbench_svt; print(diracbench_svt.__name__)"
 
 ## Numerical campaign
 
-The package includes:
+The release includes:
 
 - three original Woods-Saxon parameter families;
 - four independent numerical methods;
@@ -48,8 +49,10 @@ The package includes:
 - runtime measurements;
 - publication-quality PDF/PNG figures, including an annotated error/convergence dashboard, workflow schematic, and archive-structure map;
 - machine-readable CSV tables and JSON metadata;
-- a Colab-ready notebook and the LaTeX manuscript source.
-- the supplied Elsevier CAS class/style files and a compiled PDF render.
+- a Jupyter notebook that is compatible with Google Colab and the LaTeX manuscript source;
+- the supplied Elsevier CAS class/style files and the source manuscript. The
+  source-matched PDF render is distributed with the tagged GitHub release
+  asset `DiracBench_1.0.0_Reproducibility_Release.zip`.
 
 The independent methods agree to the few-parts-in-
 `10^5` level for the reported smooth benchmark states. The package retains two
@@ -74,15 +77,31 @@ run_campaign.py             portable campaign driver
 scripts/                    error analysis and figure generation
 tests/                      automated regression tests
 data/                       CSV outputs and JSON metadata
-figures/                    publication PDF/PNG figures
-notebook/                   Google Colab notebook
-latex/                      CAS source, class files, and compiled PDF
+figures/                    publication PDF and PNG figures
+notebook/                   Jupyter notebook (Colab-compatible)
+manuscript/                 CAS source and class/style assets
 docs/ERROR_ANALYSIS.md      metric definitions and interpretation
+docs/MANUSCRIPT_AUDIT_REPORT.md  manuscript audit, change log, and checklist
 ```
 
-The campaign driver no longer uses a hard-coded `/mnt/data` directory, does
-not remove an existing output tree, and does not reconstruct the reusable
-solver by slicing its own source code.
+The campaign driver does not use a hard-coded `/mnt/data` directory, does not
+remove an existing output tree, and does not reconstruct the reusable solver
+by slicing its own source code. The campaign metadata records the requested
+output path rather than a machine-specific absolute path.
+
+## Manuscript build
+
+The supplied CAS source can be rebuilt from `manuscript/` with:
+
+```bash
+cd manuscript
+pdflatex -interaction=nonstopmode -halt-on-error DiracBench_CPC_Manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error DiracBench_CPC_Manuscript.tex
+```
+
+The manuscript audit report documents the evidence limits, claim checks, figure
+review, reference audit, simulated reviews, and author actions still required
+before submission.
 
 ## Scope and limitations
 
@@ -96,3 +115,8 @@ point-Coulomb DKB case is not used to support the smooth-potential claims.
 ## License
 
 DiracBench is distributed under the MIT License. See `LICENSE`.
+
+The public source repository is
+<https://github.com/ozalloum/diracbench>. The reproducibility package is
+available from the corresponding public release at
+<https://github.com/ozalloum/diracbench/releases/tag/1.0.0>.

@@ -7,6 +7,7 @@ from scipy.interpolate import BSpline
 from scipy.linalg import eigh
 from numpy.polynomial.legendre import leggauss
 
+__version__ = "1.0.0"
 M=1.0
 
 def ws(r,R,a): return 1/(1+np.exp((np.asarray(r)-R)/a))
@@ -84,4 +85,3 @@ def nodes(F,thr=.01):
     F=np.asarray(F);s=np.sign(F[np.abs(F)>thr*np.max(abs(F))]);return int(np.sum(s[1:]*s[:-1]<0))
 def alt(F):
     s=np.sign(F);return float(np.mean(s[1:]*s[:-1]<0))
-

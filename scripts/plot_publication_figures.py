@@ -7,6 +7,7 @@ from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap
@@ -26,6 +27,14 @@ METHOD_COLUMNS = {
     "DKB B-spline": "dkb_bspline",
 }
 MARKERS = {"Shooting": "o", "Finite difference": "s", "Chebyshev": "^", "DKB B-spline": "D"}
+
+# Shared typography for the publication figures.  Figures 1 and 2 establish
+# this baseline; all later figures use the same axis-label, tick-label, and
+# legend sizes so that the Jupyter regeneration and the manuscript remain
+# visually consistent.
+BASE_AXIS_LABEL_SIZE = 9.5
+BASE_TICK_LABEL_SIZE = 8.5
+BASE_LEGEND_SIZE = 8.2
 
 
 def _style() -> None:
@@ -55,19 +64,43 @@ def _style() -> None:
     )
 
 
-def _panel_label(ax, label: str) -> None:
+def _panel_label(
+    ax,
+    label: str,
+    *,
+    x: float = -0.14,
+    y: float = 1.04,
+    fontsize: float = 10.5,
+) -> None:
     ax.text(
-        -0.14,
-        1.04,
+        x,
+        y,
         f"({label})",
         transform=ax.transAxes,
         va="bottom",
         ha="left",
-        fontsize=10.5,
+        fontsize=fontsize,
         fontweight="bold",
         color="#23313D",
         clip_on=False,
     )
+
+
+def _emphasize_axis_text(
+    ax,
+    *,
+    labelsize: float = BASE_AXIS_LABEL_SIZE,
+    ticksize: float = BASE_TICK_LABEL_SIZE,
+    legendsize: float | None = BASE_LEGEND_SIZE,
+) -> None:
+    """Keep labels and legends legible after a plot is scaled in the manuscript."""
+
+    ax.xaxis.label.set_size(labelsize)
+    ax.yaxis.label.set_size(labelsize)
+    ax.tick_params(axis="both", labelsize=ticksize)
+    legend = ax.get_legend()
+    if legend is not None and legendsize is not None:
+        plt.setp(legend.get_texts(), fontsize=legendsize)
 
 
 def _finish(fig, path: Path) -> None:
@@ -89,7 +122,7 @@ def _method_lines(ax, frame: pd.DataFrame, x: str, xlabel: str, ylabel: str) -> 
         )
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    ax.legend(ncol=2, frameon=False, loc="best")
+    ax.legend(ncol=1, frameon=False, loc="upper left", labelspacing=0.3)
 
 
 def _rounded_box(
@@ -247,8 +280,8 @@ def make_package_map_figure(figures: Path) -> None:
         "reproducibility release",
         "#DCEBFF",
         "#1D4ED8",
-        title_fontsize=11.5,
-        body_fontsize=9.0,
+        title_fontsize=10.5,
+        body_fontsize=8.5,
         title_offset=0.22,
         body_offset=-0.18,
         body_linespacing=1.2,
@@ -264,9 +297,9 @@ def make_package_map_figure(figures: Path) -> None:
     ]
     right = [
         (0.72, 0.74, "run_campaign.py", "portable regeneration driver", "#E7D6FF", "#9333EA"),
-        (0.72, 0.57, "figures/", "vector PDF + review PNG", "#CDEBFF", "#0284C7"),
-        (0.72, 0.37, "notebook/", "Colab-ready walkthrough", "#FFEFB0", "#CA8A04"),
-        (0.72, 0.19, "latex/", "CAS manuscript source", "#FFD8EA", "#DB2777"),
+        (0.72, 0.57, "figures/", "publication figures", "#CDEBFF", "#0284C7"),
+        (0.72, 0.37, "notebook/", "Jupyter walkthrough\n(Colab-compatible)", "#FFEFB0", "#CA8A04"),
+        (0.72, 0.19, "manuscript/", "CAS source and compiled PDF", "#FFD8EA", "#DB2777"),
     ]
     for column in (left, right):
         for index, (x, y, title, body, face, edge) in enumerate(column):
@@ -279,8 +312,8 @@ def make_package_map_figure(figures: Path) -> None:
                 body,
                 face,
                 edge,
-                title_fontsize=10.2,
-                body_fontsize=8.6,
+                title_fontsize=9.5,
+                body_fontsize=8.2,
                 title_offset=0.22,
                 body_offset=-0.18,
                 body_linespacing=1.2,
@@ -318,7 +351,7 @@ def make_package_map_figure(figures: Path) -> None:
         transform=ax.transAxes,
         ha="center",
         va="center",
-        fontsize=8.6,
+        fontsize=8.2,
         fontweight="medium",
         color="#1E3A5F",
     )
@@ -361,7 +394,6 @@ def make_publication_figures(root: str | Path) -> None:
         )
     ax.set_xticks(x, [rf"$\kappa={int(v)}$" for v in angular["kappa"]])
     ax.set_ylabel("Bound-state energy $E/m$")
-    ax.set_title("Identified bound-state energies", pad=12)
     ax.legend(frameon=False, ncol=1, loc="lower right", borderaxespad=0.35, labelspacing=0.35)
     _panel_label(ax, "a")
     ax = axes[1]
@@ -378,14 +410,12 @@ def make_publication_figures(root: str | Path) -> None:
         )
     ax.set_xticks(x, [rf"$\kappa={int(v)}$" for v in angular["kappa"]])
     ax.set_ylabel("Absolute energy error")
-    ax.set_title("Absolute error relative to shooting", pad=12)
-    ax.legend(frameon=False, loc="best")
+    ax.legend(frameon=False, ncol=1, loc="lower right", labelspacing=0.3)
     _panel_label(ax, "b")
-    fig.suptitle("DiracBench baseline agreement", y=1.02, fontsize=12, fontweight="bold")
     _finish(fig, figures / "fig_method_agreement")
 
     # Error-analysis dashboard: an annotated map plus convergence and stability views.
-    fig, axes = plt.subplots(2, 2, figsize=(7.35, 5.55), gridspec_kw={"hspace": 0.52, "wspace": 0.55})
+    fig, axes = plt.subplots(2, 2, figsize=(7.35, 5.65), gridspec_kw={"hspace": 0.58, "wspace": 0.72})
     ax = axes[0, 0]
     method_order = ["Finite difference", "Chebyshev", "DKB B-spline"]
     method_short = ["FD", "Chebyshev", "DKB"]
@@ -407,7 +437,6 @@ def make_publication_figures(root: str | Path) -> None:
     ax.set_yticks(np.arange(len(error_rows)), [label for label, _ in error_rows])
     ax.set_xlabel("Independent method")
     ax.set_ylabel("Benchmark state")
-    ax.set_title("Energy error map")
     for i in range(error_matrix.shape[0]):
         for j in range(error_matrix.shape[1]):
             text_color = "white" if log_matrix[i, j] < -7.0 or log_matrix[i, j] > -5.0 else "#17212B"
@@ -432,8 +461,7 @@ def make_publication_figures(root: str | Path) -> None:
     ax.axhline(1.0e-6, color="#64748B", linewidth=0.85, linestyle="--", label=r"$10^{-6}$ guide")
     ax.set_xlabel("Resolution / basis size")
     ax.set_ylabel("Absolute energy error", labelpad=11)
-    ax.set_title("Resolution signatures")
-    ax.legend(frameon=False, fontsize=7.0, loc="best")
+    ax.legend(frameon=False, fontsize=BASE_LEGEND_SIZE, ncol=1, loc="lower right", labelspacing=0.25)
     _panel_label(ax, "b")
 
     ax = axes[1, 0]
@@ -446,7 +474,6 @@ def make_publication_figures(root: str | Path) -> None:
         alpha=0.92,
     )
     ax.set_ylabel("Two-component $L^2$ difference")
-    ax.set_title("Wavefunction agreement")
     ax.tick_params(axis="x", rotation=18)
     ax.set_ylim(0, wave_metrics["L2_difference"].max() * 1.42)
     _panel_label(ax, "c")
@@ -460,11 +487,9 @@ def make_publication_figures(root: str | Path) -> None:
     ax.axhline(1.0e-8, color="#64748B", linewidth=0.85, linestyle="--", label=r"$10^{-8}$ guide")
     ax.set_xlabel(r"Outer domain $r_{\max}$")
     ax.set_ylabel("Relative truncation error")
-    ax.set_title("Domain locking")
-    ax.legend(frameon=False, fontsize=7.0, loc="best")
-    ax.text(0.03, 0.06, "zero shown at $10^{-16}$ floor", transform=ax.transAxes, ha="left", va="bottom", fontsize=6.8, color="#64748B")
+    ax.legend(frameon=False, fontsize=BASE_LEGEND_SIZE, ncol=1, loc="upper right", labelspacing=0.25)
+    ax.text(0.02, 0.06, "zero shown at $10^{-16}$ floor", transform=ax.transAxes, ha="left", va="bottom", fontsize=6.8, color="#64748B")
     _panel_label(ax, "d")
-    fig.suptitle("DiracBench error and convergence dashboard", y=0.995, fontsize=12, fontweight="bold")
     _finish(fig, figures / "fig_error_analysis")
 
     # Tensor sweep with a translucent method-spread envelope.
@@ -473,74 +498,103 @@ def make_publication_figures(root: str | Path) -> None:
     spread = tensor["cross_method_spread"].to_numpy()
     center = tensor["shooting"].to_numpy()
     ax.fill_between(tensor["U0"], center - spread, center + spread, color="#6C757D", alpha=0.12, label="method-spread envelope")
-    ax.set_title("Controlled tensor-strength response")
     ax.text(0.99, 0.04, f"max spread = {spread.max():.2e}", transform=ax.transAxes, ha="right", va="bottom", fontsize=8.5, color="#4D5964")
     ax.legend(frameon=False, ncol=1, loc="upper left", borderaxespad=0.25, labelspacing=0.3)
     _finish(fig, figures / "fig_tensor_sweep")
 
     # Domain independence.
-    fig, ax = plt.subplots(figsize=(7.0, 3.55))
+    fig, ax = plt.subplots(figsize=(3.8, 2.25))
     _method_lines(ax, cutoff, "rmax", r"Outer domain $r_{\max}$", r"Lowest $\kappa=-1$ energy $E$")
-    ax.set_title("Domain-locking and tail convergence")
     ax.axvspan(20, cutoff["rmax"].max(), color="#2A9D8F", alpha=0.08, label=r"stable region $r_{\max}\geq20$")
     ax.legend(frameon=False, ncol=1, loc="center left", bbox_to_anchor=(0.02, 0.55), borderaxespad=0.25, labelspacing=0.3)
+    _emphasize_axis_text(ax)
     _finish(fig, figures / "fig_rmax_independence")
 
     # Resolution convergence.
-    fig, ax = plt.subplots(figsize=(7.0, 3.55))
+    fig, ax = plt.subplots(figsize=(3.8, 2.25))
     for method, group in convergence.groupby("method", sort=False):
         label = {"FD": "Finite difference", "Chebyshev": "Chebyshev", "DKB B-spline": "DKB B-spline"}[method]
         ax.loglog(group["resolution"], group["abs_error"], marker=MARKERS[label], color=COLORS[label], label=label)
     ax.set_xlabel("Grid / collocation / basis resolution")
     ax.set_ylabel("Absolute energy error vs shooting")
-    ax.set_title("Resolution dependence exposes method-specific convergence")
     ax.legend(frameon=False, ncol=1, loc="lower right", borderaxespad=0.25, labelspacing=0.3)
+    _emphasize_axis_text(ax)
     _finish(fig, figures / "fig_resolution_convergence")
 
     # Two-component wavefunction comparison with a lower error panel.
-    fig, axes = plt.subplots(2, 1, figsize=(7.0, 5.25), sharex=True, gridspec_kw={"height_ratios": [2.0, 1.0], "hspace": 0.08})
+    fig, axes = plt.subplots(2, 1, figsize=(3.6, 3.20), sharex=True, gridspec_kw={"height_ratios": [2.0, 1.0], "hspace": 0.32})
     axes[0].plot(wave["r"], wave["shooting_F"], color=COLORS["Shooting"], label="Shooting $F$")
     axes[0].plot(wave["r"], wave["finite_difference_F"], color=COLORS["Finite difference"], linestyle="--", label="FD $F$")
     axes[0].plot(wave["r"], wave["chebyshev_F"], color=COLORS["Chebyshev"], linestyle=":", label="Chebyshev $F$")
     axes[0].plot(wave["r"], wave["shooting_G"], color=COLORS["Shooting"], alpha=0.42, label="Shooting $G$")
-    axes[0].set_ylabel("Normalized radial component")
-    axes[0].set_title(r"Phase-aligned spinors for P1, $\kappa=-1$")
-    axes[0].legend(frameon=False, ncol=1, loc="upper right", borderaxespad=0.25, labelspacing=0.3)
+    axes[0].set_ylabel("Normalized components")
+    axes[0].legend(
+        frameon=False,
+        fontsize=BASE_LEGEND_SIZE,
+        ncol=1,
+        loc="upper right",
+        borderaxespad=0.25,
+        labelspacing=0.3,
+    )
     axes[0].set_xlim(0, 16)
     axes[1].plot(wave["r"], np.abs(wave["finite_difference_F"] - wave["shooting_F"]), color=COLORS["Finite difference"], label=r"FD $|\Delta F|$")
     axes[1].plot(wave["r"], np.abs(wave["chebyshev_F"] - wave["shooting_F"]), color=COLORS["Chebyshev"], label=r"Chebyshev $|\Delta F|$")
     axes[1].set_xlabel("Radius $r$")
-    axes[1].set_ylabel("Absolute difference")
+    axes[1].set_ylabel(r"$|\Delta F|$")
+    axes[1].yaxis.set_major_locator(mticker.MaxNLocator(nbins=4, min_n_ticks=4))
     axes[1].legend(frameon=False, ncol=1, loc="upper right", borderaxespad=0.25, labelspacing=0.3)
-    _panel_label(axes[0], "a")
-    _panel_label(axes[1], "b")
+    for axis in axes:
+        _emphasize_axis_text(axis)
+    _panel_label(axes[0], "a", x=0.00, y=1.07, fontsize=10.5)
+    _panel_label(axes[1], "b", x=0.00, y=1.07, fontsize=10.5)
     _finish(fig, figures / "fig_wavefunction_comparison")
 
     # Explicit centered-FD spurious-state diagnostic.
-    fig, axes = plt.subplots(2, 1, figsize=(7.0, 4.75), sharex=True, gridspec_kw={"height_ratios": [2.0, 1.0], "hspace": 0.08})
+    fig, axes = plt.subplots(2, 1, figsize=(3.6, 3.25), sharex=True, gridspec_kw={"height_ratios": [2.0, 1.0], "hspace": 0.32})
     axes[0].plot(spurious["r"], spurious["physical_F"], color=COLORS["Chebyshev"], label="Physical branch")
     axes[0].plot(spurious["r"], spurious["oscillatory_F"], color=COLORS["Finite difference"], alpha=0.78, label="Grid-scale candidate")
-    axes[0].set_ylabel("Scaled large component")
-    axes[0].set_title("Centered finite differences: physical versus oscillatory branch")
+    axes[0].set_ylabel("Scaled component")
     axes[0].set_xlim(0, 12)
-    axes[0].legend(frameon=False, loc="upper right")
     axes[1].plot(spurious["r"], np.abs(np.diff(spurious["oscillatory_F"], prepend=spurious["oscillatory_F"].iloc[0])), color=COLORS["Finite difference"])
     axes[1].set_xlabel("Radius $r$")
-    axes[1].set_ylabel("Step-to-step change")
-    _panel_label(axes[0], "a")
-    _panel_label(axes[1], "b")
+    axes[1].set_ylabel("Step change")
+    axes[1].yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, min_n_ticks=5))
+    for axis in axes:
+        _emphasize_axis_text(axis)
+    _panel_label(axes[0], "a", x=0.00, y=1.07, fontsize=10.5)
+    _panel_label(axes[1], "b", x=0.00, y=1.07, fontsize=10.5)
+    fig.subplots_adjust(top=0.93, bottom=0.25)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        frameon=True,
+        facecolor="white",
+        edgecolor="#CBD5E1",
+        framealpha=0.86,
+        fontsize=BASE_LEGEND_SIZE,
+        ncol=2,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.012),
+        columnspacing=0.8,
+        labelspacing=0.25,
+        handlelength=1.7,
+        handletextpad=0.35,
+        borderpad=0.25,
+    )
     _finish(fig, figures / "fig_fd_spurious_diagnostic")
 
     # Runtime figure with direct value labels.
-    fig, ax = plt.subplots(figsize=(7.0, 3.35))
+    fig, ax = plt.subplots(figsize=(3.8, 2.25))
     labels = performance["method"].replace({"Shooting": "Shooting", "FD": "FD", "Chebyshev": "Chebyshev", "DKB B-spline": "DKB B-spline"})
     colors = [COLORS.get(label, COLORS["Finite difference"]) for label in labels]
     bars = ax.bar(labels, performance["median_runtime_s"], color=colors, alpha=0.92, width=0.62)
     ax.set_ylabel("Median runtime (s)")
-    ax.set_title(r"Reference runtime: one targeted P1, $\kappa=-1$ solve")
     ax.tick_params(axis="x", rotation=12)
+    _emphasize_axis_text(ax)
+    ax.set_ylim(0, float(performance["median_runtime_s"].max()) * 1.20)
     for bar, value in zip(bars, performance["median_runtime_s"]):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{value:.3f}s", ha="center", va="bottom", fontsize=8)
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{value:.3f}s", ha="center", va="bottom", fontsize=9.31)
     _finish(fig, figures / "fig_performance")
 
     make_workflow_figure(figures)

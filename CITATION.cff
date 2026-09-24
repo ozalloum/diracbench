@@ -1,9 +1,10 @@
 cff-version: 1.2.0
 message: "If you use DiracBench, please cite the associated Computer Physics Communications manuscript."
 title: "DiracBench: A Reproducible Four-Method Framework for Relativistic Bound States with Scalar, Vector, and Tensor Interactions"
-date-released: 2026-09-22
 version: 1.0.0
+date-released: 2026-09-22
 repository-code: https://github.com/ozalloum/diracbench
+url: https://github.com/ozalloum/diracbench/releases/tag/1.0.0
 authors:
   - family-names: Zalloum
     given-names: Othman H. Y.

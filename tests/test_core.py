@@ -61,7 +61,43 @@ class TestDiracBenchCore(unittest.TestCase):
         for field in ("analysis", "metric", "value", "absolute_error", "relative_error"):
             self.assertIn(field, header)
 
+    def test_release_metadata_is_consistent(self) -> None:
+        pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+        campaign = (ROOT / "run_campaign.py").read_text(encoding="utf-8")
+        metadata = (ROOT / "data" / "campaign_metadata.json").read_text(encoding="utf-8")
+        self.assertIn('version = "1.0.0"', pyproject)
+        self.assertIn("version: 1.0.0", citation)
+        self.assertIn("PACKAGE_VERSION = '1.0.0'", campaign)
+        self.assertIn('"version": "1.0.0"', metadata)
+        self.assertNotIn("version = \"0.", pyproject)
+        self.assertNotIn("version: 0.", citation)
+        self.assertNotIn("/workspace/", metadata)
+
+    def test_jupyter_notebook_and_publication_plot_contract(self) -> None:
+        notebooks = list((ROOT / "notebook").glob("*.ipynb"))
+        self.assertTrue(any("Jupyter" in path.name for path in notebooks))
+        plotter = (ROOT / "scripts" / "plot_publication_figures.py").read_text(encoding="utf-8")
+        self.assertNotIn("set_title", plotter)
+        self.assertNotIn("suptitle", plotter)
+
+    def test_publication_figures_are_regenerated(self) -> None:
+        required = (
+            "fig_diracbench_package_map.pdf",
+            "fig_diracbench_workflow.pdf",
+            "fig_error_analysis.pdf",
+            "fig_method_agreement.pdf",
+            "fig_performance.pdf",
+            "fig_resolution_convergence.pdf",
+            "fig_rmax_independence.pdf",
+            "fig_tensor_sweep.pdf",
+            "fig_wavefunction_comparison.pdf",
+        )
+        for filename in required:
+            path = ROOT / "figures" / filename
+            self.assertTrue(path.exists(), filename)
+            self.assertGreater(path.stat().st_size, 1000, filename)
+
 
 if __name__ == "__main__":
     unittest.main()
-

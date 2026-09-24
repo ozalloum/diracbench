@@ -15,6 +15,7 @@ from scipy.linalg import eigh
 from numpy.polynomial.legendre import leggauss
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
+PACKAGE_VERSION = '1.0.0'
 
 
 def _parse_args():
@@ -28,7 +29,7 @@ def _parse_args():
     parser.add_argument(
         '--output',
         type=Path,
-        default=PACKAGE_ROOT / 'generated_campaign',
+        default=Path('generated_campaign'),
         help='directory for regenerated CSV files, figures, metadata, and source',
     )
     return parser.parse_args()
@@ -214,8 +215,11 @@ make_publication_figures(root)
     json.dumps(
         {
             'program': 'DiracBench',
+            'version': PACKAGE_VERSION,
             'python': sys.version,
-            'output_directory': '.',
+            'output_directory': str(args.output.expanduser()),
+            'repository': 'https://github.com/ozalloum/diracbench',
+            'release': 'https://github.com/ozalloum/diracbench/releases/tag/1.0.0',
             'analysis_summary': analysis_summary,
         },
         indent=2,

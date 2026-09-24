@@ -12,7 +12,7 @@ Running `python run_campaign.py --output generated_campaign` writes:
   centered-finite-difference diagnostic;
 - `data/error_analysis_summary.json`: aggregate maxima and minima used by the
   manuscript;
-- `figures/fig_error_analysis.pdf` and `.png`: publication figure summarizing
+- `fig_error_analysis.pdf` and `figures/fig_error_analysis.png`: publication figure summarizing
   the numerical reliability envelope.
 
 ## Definitions
@@ -56,4 +56,3 @@ cross-check, resolution study, domain study, and wavefunction overlap should be
 read together. The DKB refinement curve is intentionally retained even when it
 is non-monotonic, and the centered-FD spurious branch is retained as a
 diagnostic rather than silently removed.
-

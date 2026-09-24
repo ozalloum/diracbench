@@ -5,5 +5,5 @@ recursive-include tests *.py
 recursive-include data *
 recursive-include figures *
 recursive-include notebook *
-recursive-include latex *
+recursive-include manuscript *
 recursive-include docs *.md
